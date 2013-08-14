@@ -1,0 +1,9 @@
+#timeline > ul > li {
+  list-style: none;
+}
+#timeline > ul > li > ul > li {
+  list-style: disc;
+}
+#timeline li.complete {
+  text-decoration: line-through;
+}
