@@ -9,17 +9,28 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
 
     <script type="text/javascript" src="https://cdn.firebase.com/v0/firebase.js"></script>
+    <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
+
     <script type="text/javascript" src="lib/angularFire.js"></script>
     <script src="app.js"></script>
   </head>
-  <body ng-controller="TaskListCtrl">
+  <body>
     <nav class="navbar" role="navigation">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".main-navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
         <a class="navbar-brand" href="/">Triple Task</a>
       </div>
+      <div class="collapse navbar-collapse main-navbar-collapse">
+        <a href="#" class="btn btn-default navbar-btn navbar-right" ng-click="login()">Log in</a>
+      </div>
     </nav>
-    <div class="container">
+    <div class="container" ng-controller="TaskListCtrl">
       <h2>New Task</h2>
       <form ng-submit="addTaskFormSubmit($event)">
         <div class="form-group">
