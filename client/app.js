@@ -1,9 +1,15 @@
-angular.module('triple-task', [])
+angular.module('triple-task', ['firebase'])
 
-.controller('TaskListCtrl', function ($scope, $timeout) {
+.controller('TaskListCtrl', ['$scope', 'angularFire', function ($scope, angularFire) {
+  var dbUrl = 'https://triple-task.firebaseio.com/triple';
+
+  var promise = angularFire(dbUrl, $scope, 'backlog');
+  
+  /*
   $scope.backlog = [
     { 'text': 'Finish this big thing' }
   ];
+  */
 
   $scope.taskList = [];
 
@@ -86,4 +92,4 @@ angular.module('triple-task', [])
     taskList.tasks.splice(index, 1);
     $scope.backlog.push(task);
   }
-});
+}]);
