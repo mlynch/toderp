@@ -1,40 +1,58 @@
 <!DOCTYPE html>
 <html ng-app="triple-task">
   <head>
+    <link rel="stylesheet" href="lib/bootstrap3/bootstrap.css" type="text/css">
     <link rel="stylesheet" href="style.css" type="text/css">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="lib/bootstrap3/bootstrap.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
     <script src="app.js"></script>
   </head>
   <body ng-controller="TaskListCtrl">
-    <h2>New Task</h2>
-    <form ng-submit="addTaskFormSubmit($event)">
-      <input ng-model="taskDraft" type="text">
-      <button class="btn btn-primary">Add</button>
-    </form>
-    <h2>Backlog</h2>
-    <div id="backlog">
-      <ul>
-        <li ng-repeat="task in backlog">
-          <span class="task-name">{{task.text}}</span>
-          <a href="#" ng-click="enqueueTask(task, $index)">Today</a>
-          <a href="#" ng-click="deleteBacklogTask(task, $index)">Never</a>
-        </li>
-      </ul>
-    </div>
-    <h2>Timeline</h2>
-    <div id="timeline">
-      <ul>
-        <li ng-repeat="tasks in taskList">
-          <h4>{{tasks.date | date:'shortDate'}}</h4>
-          <ul>
-            <li ng-repeat="task in tasks.tasks" ng-class="{complete:task.complete}">
-              {{task.text}}
-              <a href="#" ng-click="finishTask(tasks, task, $index)">Done</a>
-              <a href="#" ng-click="backlogTask(tasks, task, $index)">Not today</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
+    <nav class="navbar" role="navigation">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">Triple Task</a>
+      </div>
+    </nav>
+    <div class="container">
+      <h2>New Task</h2>
+      <form ng-submit="addTaskFormSubmit($event)">
+        <div class="form-group">
+          <div class="input-group">
+            <input ng-model="taskDraft" type="text" class="form-control">
+            <span class="input-group-btn">
+              <button class="btn btn-primary">Add</button>
+            </span>
+          </div>
+        </div>
+      </form>
+      <h2>Backlog</h2>
+      <div id="backlog">
+        <ul>
+          <li ng-repeat="task in backlog">
+            <span class="task-name">{{task.text}}</span>
+            <a href="#" ng-click="enqueueTask(task, $index)">Today</a>
+            <a href="#" ng-click="deleteBacklogTask(task, $index)">Never</a>
+          </li>
+        </ul>
+      </div>
+      <h2>Timeline</h2>
+      <div id="timeline">
+        <ul>
+          <li ng-repeat="tasks in taskList">
+            <h4>{{tasks.date | date:'shortDate'}}</h4>
+            <ul>
+              <li ng-repeat="task in tasks.tasks" ng-class="{complete:task.complete}">
+                {{task.text}}
+                <a href="#" ng-click="finishTask(tasks, task, $index)">Done</a>
+                <a href="#" ng-click="backlogTask(tasks, task, $index)">Not today</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
     </div>
   </body>
 </html>
