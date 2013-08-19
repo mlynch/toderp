@@ -4,27 +4,27 @@ angular.module('toderp', ['firebase'])
 
 }])
 
-.controller('TaskListCtrl', ['$scope', 'angularFire', function ($scope, angularFire) {
+.controller('TaskListCtrl', ['$scope', '$q', 'angularFire', function ($scope, $q, angularFire) {
   // We are loading
   $scope.loading = true;
 
   var dbUrl = 'https://triple-task.firebaseio.com/triple';
 
-  var promise = angularFire(dbUrl, $scope, 'backlog');
+  var backlogPromise = angularFire(dbUrl, $scope, 'backlog');
+  var taskListPromise = angularFire(dbUrl, $scope, 'taskList');
 
-
-  promise.then(function() {
+  $q.all([backlogPromise, taskListPromise]).then(function() {
   
   // Done loading
   $scope.loading = false;
 
+  //$scope.backlog = []
+  //$scope.taskList = [];
   /*
-  $scope.backlog = [
     { 'text': 'Finish this big thing' }
   ];
   */
 
-  $scope.taskList = [];
 
   /**
    * Process new task submit
@@ -63,12 +63,12 @@ angular.module('toderp', ['firebase'])
 
     var firstTask = $scope.taskList.length && $scope.taskList[0];
 
-    if(firstTask && firstTask.date.getTime() == today.getTime()) {
+    if(firstTask && firstTask.date && firstTask.date == today.getTime()) {
       return firstTask;
     }
 
     tasks = {
-      date: today,
+      date: today.getTime(),
       tasks: []
     }
     $scope.taskList.unshift(tasks);
