@@ -1,10 +1,23 @@
-angular.module('triple-task', ['firebase'])
+angular.module('toderp', ['firebase'])
+
+.controller('LoginCtrl', ['$scope', 'angularFire', function($scope, angularFire) {
+
+}])
 
 .controller('TaskListCtrl', ['$scope', 'angularFire', function ($scope, angularFire) {
+  // We are loading
+  $scope.loading = true;
+
   var dbUrl = 'https://triple-task.firebaseio.com/triple';
 
   var promise = angularFire(dbUrl, $scope, 'backlog');
+
+
+  promise.then(function() {
   
+  // Done loading
+  $scope.loading = false;
+
   /*
   $scope.backlog = [
     { 'text': 'Finish this big thing' }
@@ -92,4 +105,5 @@ angular.module('triple-task', ['firebase'])
     taskList.tasks.splice(index, 1);
     $scope.backlog.push(task);
   }
+  });
 }]);

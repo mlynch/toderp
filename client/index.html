@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="triple-task">
+<html ng-app="toderp">
   <head>
     <link rel="stylesheet" href="lib/bootstrap3/bootstrap.css" type="text/css">
     <link rel="stylesheet" href="style.css" type="text/css">
@@ -24,18 +24,18 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">Triple Task</a>
+        <a class="navbar-brand" href="/">Toderp</a>
       </div>
       <div class="collapse navbar-collapse main-navbar-collapse">
         <a href="#" class="btn btn-default navbar-btn navbar-right" ng-click="login()">Log in</a>
       </div>
     </nav>
     <div class="container" ng-controller="TaskListCtrl">
-      <h2>New Task</h2>
-      <form ng-submit="addTaskFormSubmit($event)">
+      <div class="loading" ng-class="{hide:!loading}">Loading tasks...</div>
+      <form ng-submit="addTaskFormSubmit($event)" ng-class="{hide:loading}">
         <div class="form-group">
           <div class="input-group">
-            <input ng-model="taskDraft" type="text" class="form-control">
+            <input ng-model="taskDraft" type="text" class="form-control" placeholder="Do this thing...">
             <span class="input-group-btn">
               <button class="btn btn-primary">Add</button>
             </span>
